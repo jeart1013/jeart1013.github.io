@@ -72,18 +72,19 @@ function initializeVideoPlayer(platform) {
     }
 
     // 根據平台設定不同的起始畫質
-    const startLevel = platform === 'mobile' ? 4 : 3;  // 手機:480p, PC:720p
+    // HLS.js 會將畫質從低到高排序: [0]=480p, [1]=720p, [2]=1080p, [3]=1440p, [4]=2160p
+    const targetStartLevel = platform === 'mobile' ? 0 : 1;  // 手機:480p, PC:720p
 
     hls = new Hls({
-        startLevel: startLevel,
-        maxBufferLength: 10,        // 減少緩衝時間到 10 秒
-        maxMaxBufferLength: 20,     // 最大 20 秒
-        abrEwmaDefaultEstimate: 5000000,  // 預設帶寬 5 Mbps
-        abrBandWidthFactor: 0.8,    // 降低帶寬保守系數（更積極切換）
-        abrBandWidthUpFactor: 0.7   // 更容易升級
+        startLevel: targetStartLevel,   // 設定起始畫質，之後會自動調整
+        maxBufferLength: 4,             // 減少緩衝時間到 4 秒（快速切換）
+        maxMaxBufferLength: 8,          // 最大 8 秒
+        abrEwmaDefaultEstimate: platform === 'mobile' ? 1500000 : 3000000,  // 手機1.5Mbps, PC 3Mbps
+        abrBandWidthFactor: 0.8,        // 降低帶寬保守系數（更積極切換）
+        abrBandWidthUpFactor: 0.7       // 更容易升級
     });
 
-    console.log(`🎬 ${platform} 版起始畫質: ${platform === 'mobile' ? '480p' : '720p'}`);
+    console.log(`🎬 ${platform} 版起始畫質: ${platform === 'mobile' ? '480p (Level 0)' : '720p (Level 1)'} (自動調整已啟用)`);
 
     videoPlayer.muted = true;
     totalDownloaded = 0;
@@ -93,11 +94,18 @@ function initializeVideoPlayer(platform) {
 
     hls.on(Hls.Events.MANIFEST_PARSED, function () {
         console.log('✅ HLS 載入成功');
-        console.log(`🎯 ${platform} 版：從 480p 開始，允許自動調整`);
+
+        const levels = hls.levels;
+        console.log('📊 可用畫質層級:');
+        levels.forEach((level, index) => {
+            console.log(`  [${index}] ${level.width}×${level.height} (${level.height}p) - ${(level.bitrate / 1000000).toFixed(2)} Mbps`);
+        });
+
+        // HLS.js 會自動從 startLevel 開始，然後根據網路速度調整
+        console.log(`🎯 ${platform} 版：從 ${levels[targetStartLevel].height}p 開始，將根據網路速度自動調整`);
 
         updateStatus('背景播放中', videoStatus);
 
-        const levels = hls.levels;
         const levelStr = levels.map(l => l.height + 'p').join(', ');
         updateVideoInfo(infoElements, {
             levels: levelStr,
