@@ -77,8 +77,8 @@ function initializeVideoPlayer(platform) {
 
     hls = new Hls({
         startLevel: targetStartLevel,   // 設定起始畫質，之後會自動調整
-        maxBufferLength: 4,             // 減少緩衝時間到 4 秒（快速切換）
-        maxMaxBufferLength: 8,          // 最大 8 秒
+        maxBufferLength: 3,             // 減少緩衝時間到 4 秒（快速切換）
+        maxMaxBufferLength: 5,          // 最大 8 秒
         abrEwmaDefaultEstimate: platform === 'mobile' ? 1500000 : 3000000,  // 手機1.5Mbps, PC 3Mbps
         abrBandWidthFactor: 0.8,        // 降低帶寬保守系數（更積極切換）
         abrBandWidthUpFactor: 0.7       // 更容易升級
@@ -221,3 +221,4 @@ window.addEventListener('beforeunload', function () {
         hls.destroy();
     }
 });
+
