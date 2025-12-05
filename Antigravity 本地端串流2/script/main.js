@@ -78,7 +78,7 @@ function initializeVideoPlayer(platform) {
     hls = new Hls({
         startLevel: targetStartLevel,   // 設定起始畫質，之後會自動調整
         maxBufferLength: 3,             // 減少緩衝時間到 4 秒（快速切換）
-        maxMaxBufferLength: 5,          // 最大 8 秒
+        maxMaxBufferLength: 6,          // 最大 8 秒
         abrEwmaDefaultEstimate: platform === 'mobile' ? 1500000 : 3000000,  // 手機1.5Mbps, PC 3Mbps
         abrBandWidthFactor: 0.8,        // 降低帶寬保守系數（更積極切換）
         abrBandWidthUpFactor: 0.7       // 更容易升級
@@ -101,7 +101,6 @@ function initializeVideoPlayer(platform) {
             console.log(`  [${index}] ${level.width}×${level.height} (${level.height}p) - ${(level.bitrate / 1000000).toFixed(2)} Mbps`);
         });
 
-        // HLS.js 會自動從 startLevel 開始，然後根據網路速度調整
         console.log(`🎯 ${platform} 版：從 ${levels[targetStartLevel].height}p 開始，將根據網路速度自動調整`);
 
         updateStatus('背景播放中', videoStatus);
@@ -127,6 +126,8 @@ function initializeVideoPlayer(platform) {
             quality: level.height + 'p',
             bitrate: bitrate
         });
+
+        console.log(`📊 畫質切換到: ${level.height}p (Level ${data.level})`);
     });
 
     hls.on(Hls.Events.FRAG_LOADED, function (event, data) {
@@ -154,6 +155,41 @@ function initializeVideoPlayer(platform) {
         updateVideoInfo(infoElements, {
             resolution: videoPlayer.videoWidth + '×' + videoPlayer.videoHeight
         });
+    });
+
+    // 強制保持畫質的手動循環
+    let savedQualityLevel = targetStartLevel;  // 保存循環前的畫質
+    let isLooping = false;  // 是否正在循環
+
+    // 記錄當前畫質
+    hls.on(Hls.Events.LEVEL_SWITCHED, function (event, data) {
+        if (!isLooping) {
+            savedQualityLevel = data.level;
+        }
+    });
+
+    videoPlayer.addEventListener('ended', function () {
+        const currentLevel = hls.currentLevel >= 0 ? hls.currentLevel : savedQualityLevel;
+        console.log(`🔄 影片結束，保持畫質: ${hls.levels[currentLevel]?.height}p (Level ${currentLevel})`);
+
+        isLooping = true;
+
+        // 暫時禁用自動畫質切換
+        hls.autoLevelEnabled = false;
+        hls.currentLevel = currentLevel;
+
+        // 回到開頭並播放
+        videoPlayer.currentTime = 0;
+        videoPlayer.play().catch(function (error) {
+            console.error('播放失敗:', error);
+        });
+
+        // 1 秒後重新啟用自動畫質，但保持當前等級
+        setTimeout(() => {
+            hls.autoLevelEnabled = true;
+            isLooping = false;
+            console.log(`✅ 循環完成，當前維持在 ${hls.levels[currentLevel]?.height}p，ABR 已重新啟用`);
+        }, 1000);
     });
 }
 
@@ -221,4 +257,3 @@ window.addEventListener('beforeunload', function () {
         hls.destroy();
     }
 });
-
