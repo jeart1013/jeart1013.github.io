@@ -1,0 +1,317 @@
+// =========================================
+// 設備偵測與初始化
+// =========================================
+
+/**
+ * 偵測是否為行動裝置
+ * @returns {boolean} 如果是手機或平板返回 true
+ */
+function isMobileDevice() {
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+    // 檢查常見的移動設備標識
+    const mobileRegex = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+    const isMobileUA = mobileRegex.test(userAgent);
+
+    // 檢查螢幕寬度（作為額外驗證）
+    const isMobileScreen = window.innerWidth <= 768;
+
+    // 檢查觸控支援
+    const hasTouchScreen = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+    return isMobileUA || (isMobileScreen && hasTouchScreen);
+}
+
+/**
+ * 顯示對應平台的內容
+ */
+function displayContent() {
+    const pcContent = document.getElementById('pc-content');
+    const mobileContent = document.getElementById('mobile-content');
+
+    if (isMobileDevice()) {
+        console.log('✅ 偵測到行動裝置 - 載入手機版內容');
+        mobileContent.classList.add('active');
+        pcContent.classList.remove('active');
+        initializeVideoPlayer('mobile');
+    } else {
+        console.log('✅ 偵測到桌面裝置 - 載入 PC 版內容');
+        pcContent.classList.add('active');
+        mobileContent.classList.remove('active');
+        initializeVideoPlayer('pc');
+    }
+}
+
+// =========================================
+// HLS 影片播放器設定（PC 和手機版）
+// =========================================
+
+let hls = null;
+let totalDownloaded = 0;
+
+/**
+ * 初始化 HLS 影片播放器
+ * @param {string} platform - 'pc' 或 'mobile'
+ */
+function initializeVideoPlayer(platform) {
+    const videoPlayer = platform === 'pc'
+        ? document.getElementById('pc-video-player')
+        : document.getElementById('video-player');
+    const videoStatus = platform === 'pc'
+        ? document.getElementById('pc-video-status')
+        : document.getElementById('video-status');
+
+    // 取得資訊顯示元素
+    const prefix = platform === 'pc' ? 'pc' : 'mobile';
+    const infoElements = {
+        resolution: document.getElementById(`${prefix}-resolution`),
+        quality: document.getElementById(`${prefix}-quality`),
+        bitrate: document.getElementById(`${prefix}-bitrate`),
+        levels: document.getElementById(`${prefix}-levels`),
+        downloaded: document.getElementById(`${prefix}-downloaded`)
+    };
+
+    if (!videoPlayer) {
+        console.error('❌ 找不到影片元素');
+        return;
+    }
+
+    // HLS 串流影片 URL
+    const videoUrl = 'video/master_all.m3u8'; // 本地 HLS 串流
+
+    console.log(`🎬 正在初始化 ${platform} 版本影片播放器...`);
+
+    if (!Hls.isSupported()) {
+        console.warn('⚠️ HLS.js 不支援此瀏覽器');
+
+        // 如果原生支援 HLS（如 Safari）
+        if (videoPlayer.canPlayType('application/vnd.apple.mpegurl')) {
+            console.log('✅ 使用原生 HLS 播放');
+            videoPlayer.src = videoUrl;
+            videoPlayer.muted = true;
+            videoPlayer.play().catch(err => {
+                console.error('自動播放失敗:', err);
+                updateStatus('請點擊頁面啟動', videoStatus, true);
+            });
+            updateStatus('背景播放中', videoStatus);
+
+            // 更新基本資訊（原生播放）
+            videoPlayer.addEventListener('loadedmetadata', () => {
+                updateVideoInfo(infoElements, {
+                    resolution: `${videoPlayer.videoWidth}×${videoPlayer.videoHeight}`,
+                    quality: '自動',
+                    bitrate: '-',
+                    levels: '原生播放',
+                    downloaded: '-'
+                });
+            });
+        } else {
+            updateStatus('不支援 HLS 播放', videoStatus, true);
+        }
+        return;
+    }
+
+    // 初始化 HLS.js
+    hls = new Hls({
+        enableWorker: true,
+        lowLatencyMode: true,
+        backBufferLength: 90,
+        startLevel: 4,  // 從最低畫質開始（480p）
+        maxAutoLevel: 3,  // 最高只自動升級到 720p，不會跳到 1080p/2K/4K
+        maxBufferLength: 30,
+        maxMaxBufferLength: 60
+    });
+
+    // 確保影片靜音
+    videoPlayer.muted = true;
+    totalDownloaded = 0;
+    document.removeEventListener('click', playOnClick);
+}, { once: true });
+        });
+    });
+
+// 畫質等級切換
+hls.on(Hls.Events.LEVEL_SWITCHED, function (event, data) {
+    const level = hls.levels[data.level];
+    const resolution = `${level.width}×${level.height}`;
+    const bitrate = (level.bitrate / 1000000).toFixed(2) + ' Mbps';
+
+    updateVideoInfo(infoElements, {
+        resolution: resolution,
+        quality: `${level.height}p`,
+        bitrate: bitrate
+    });
+
+    console.log(`🎬 畫質切換至: ${level.height}p (${resolution})`);
+});
+
+// 片段載入完成
+hls.on(Hls.Events.FRAG_LOADED, function (event, data) {
+    const fragSize = data.frag.stats.total / 1024 / 1024; // MB
+    totalDownloaded += fragSize;
+
+    updateVideoInfo(infoElements, {
+        downloaded: totalDownloaded.toFixed(2) + ' MB'
+    });
+});
+
+// 錯誤處理
+hls.on(Hls.Events.ERROR, function (event, data) {
+    console.error('❌ HLS 錯誤:', data);
+
+    if (data.fatal) {
+        switch (data.type) {
+            case Hls.ErrorTypes.NETWORK_ERROR:
+                console.error('網路錯誤，嘗試恢復...');
+                updateStatus('網路錯誤，重連中...', videoStatus, true);
+                hls.startLoad();
+                break;
+            case Hls.ErrorTypes.MEDIA_ERROR:
+                console.error('媒體錯誤，嘗試恢復...');
+                updateStatus('媒體錯誤，修復中...', videoStatus, true);
+                hls.recoverMediaError();
+                break;
+            default:
+                console.error('無法恢復的錯誤');
+                updateStatus('播放失敗', videoStatus, true);
+                hls.destroy();
+                break;
+        }
+    }
+});
+
+// ===== 影片元素事件監聽 =====
+
+videoPlayer.addEventListener('loadedmetadata', function () {
+    const resolution = `${videoPlayer.videoWidth}×${videoPlayer.videoHeight}`;
+    updateVideoInfo(infoElements, {
+        resolution: resolution
+    });
+});
+
+videoPlayer.addEventListener('play', function () {
+    updateStatus('背景播放中', videoStatus);
+});
+
+videoPlayer.addEventListener('pause', function () {
+    updateStatus('已暫停', videoStatus);
+});
+
+videoPlayer.addEventListener('waiting', function () {
+    updateStatus('緩衝中...', videoStatus);
+});
+
+videoPlayer.addEventListener('canplay', function () {
+    updateStatus('背景播放中', videoStatus);
+});
+
+videoPlayer.addEventListener('playing', function () {
+    updateStatus('背景播放中', videoStatus);
+    console.log('✅ 影片正在播放');
+});
+
+videoPlayer.addEventListener('error', function (e) {
+    console.error('❌ 影片元素錯誤:', e);
+    updateStatus('影片載入失敗', videoStatus, true);
+});
+}
+
+/**
+ * 更新影片資訊顯示
+ * @param {Object} elements - 資訊元素物件
+ * @param {Object} data - 要更新的資料
+ */
+function updateVideoInfo(elements, data) {
+    if (data.resolution && elements.resolution) {
+        elements.resolution.textContent = data.resolution;
+        elements.resolution.classList.add('highlight');
+    }
+    if (data.quality && elements.quality) {
+        elements.quality.textContent = data.quality;
+        elements.quality.classList.add('highlight');
+    }
+    if (data.bitrate && elements.bitrate) {
+        elements.bitrate.textContent = data.bitrate;
+    }
+    if (data.levels && elements.levels) {
+        elements.levels.textContent = data.levels;
+    }
+    if (data.downloaded && elements.downloaded) {
+        elements.downloaded.textContent = data.downloaded;
+    }
+}
+
+/**
+ * 更新狀態顯示
+ * @param {string} message - 狀態訊息
+ * @param {HTMLElement} statusElement - 狀態元素
+ * @param {boolean} isError - 是否為錯誤訊息
+ */
+function updateStatus(message, statusElement, isError = false) {
+    if (statusElement) {
+        statusElement.textContent = message;
+        statusElement.style.color = isError ? '#ff4757' : '#00d4ff';
+
+        if (isError) {
+            statusElement.classList.remove('highlight');
+        } else {
+            statusElement.classList.add('highlight');
+        }
+    }
+}
+
+// =========================================
+// 頁面載入與清理
+// =========================================
+
+/**
+ * 頁面載入完成後執行
+ */
+document.addEventListener('DOMContentLoaded', function () {
+    console.log('🚀 頁面初始化');
+    displayContent();
+});
+
+/**
+ * 視窗大小改變時重新偵測（防止旋轉設備）
+ */
+let resizeTimer;
+window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () {
+        console.log('🔄 螢幕大小改變，重新偵測裝置');
+
+        // 清理舊的 HLS 實例
+        if (hls) {
+            hls.destroy();
+            hls = null;
+        }
+
+        totalDownloaded = 0;
+        displayContent();
+    }, 500);
+});
+
+/**
+ * 頁面卸載時清理資源
+ */
+window.addEventListener('beforeunload', function () {
+    if (hls) {
+        hls.destroy();
+        console.log('🧹 HLS 播放器已清理');
+    }
+});
+
+// =========================================
+// 除錯工具（開發用）
+// =========================================
+
+// 在控制台顯示設備資訊
+console.log('📱 設備資訊:', {
+    userAgent: navigator.userAgent,
+    螢幕寬度: window.innerWidth,
+    螢幕高度: window.innerHeight,
+    觸控支援: 'ontouchstart' in window,
+    平台: navigator.platform,
+    是否為行動裝置: isMobileDevice()
+});
