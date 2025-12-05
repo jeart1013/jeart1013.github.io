@@ -1,0 +1,145 @@
+/* 最小化 CSS - 移除背景色 */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', 'Microsoft JhengHei', Arial, sans-serif;
+    color: #ffffff;
+    background: #000;
+}
+
+.content-wrapper {
+    display: none;
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+.content-wrapper.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    position: relative;
+    z-index: 10;
+}
+
+/* 背景影片 */
+.video-background {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    object-fit: cover !important;
+    z-index: 1 !important;
+    opacity: 0.6 !important;
+    pointer-events: none !important;
+}
+
+/* PC 版 - 移除背景色 */
+#pc-content {
+    background: transparent;
+}
+
+#pc-content .title {
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #fff;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.9);
+}
+
+#pc-content .subtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.9);
+}
+
+/* 手機版 - 移除背景色 */
+#mobile-content {
+    background: transparent;
+}
+
+#mobile-content .title {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #fff;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.9);
+}
+
+#mobile-content .subtitle {
+    text-align: center;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.9);
+}
+
+/* 資訊面板 */
+.video-info-panel {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.info-panel-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #fff;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+}
+
+.info-item {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+.info-label {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+.info-value {
+    font-size: 1.05rem;
+    color: #fff;
+    font-weight: 600;
+}
+
+/* 響應式 */
+@media (max-width: 768px) {
+    .content-wrapper {
+        padding: 1.5rem;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}

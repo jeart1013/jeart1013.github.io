@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="響應式串流影片播放頁面">
+    <title>智能串流播放器</title>
+    <link rel="stylesheet" href="style/main-minimal.css">
+    <link rel="stylesheet" href="style/fix-flicker.css">
+    <!-- HLS.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+</head>
+
+<body>
+    <!-- PC 版本內容 -->
+    <div id="pc-content" class="content-wrapper">
+        <!-- 背景影片 -->
+        <video id="pc-video-player" class="video-background" autoplay muted loop playsinline>
+            您的瀏覽器不支援影片播放
+        </video>
+
+        <div class="container">
+            <h1 class="title">桌面版串流平台</h1>
+            <p class="subtitle">您正在使用電腦瀏覽此頁面</p>
+
+            <!-- PC 版影片資訊面板 -->
+            <div class="video-info-panel">
+                <h3 class="info-panel-title">📊 串流資訊</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">解析度</span>
+                        <span class="info-value" id="pc-resolution">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">當前畫質</span>
+                        <span class="info-value" id="pc-quality">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">碼率</span>
+                        <span class="info-value" id="pc-bitrate">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">可用畫質</span>
+                        <span class="info-value" id="pc-levels">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">已下載</span>
+                        <span class="info-value" id="pc-downloaded">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">狀態</span>
+                        <span class="info-value" id="pc-video-status">載入中...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 手機版本內容 -->
+    <div id="mobile-content" class="content-wrapper">
+        <!-- 背景影片 -->
+        <video id="video-player" class="video-background" autoplay muted loop playsinline>
+            您的瀏覽器不支援影片播放
+        </video>
+
+        <div class="container">
+            <h1 class="title">行動版串流平台</h1>
+            <p class="subtitle">使用 HLS.js 優化串流播放</p>
+
+            <!-- 手機版影片資訊面板 -->
+            <div class="video-info-panel mobile-panel">
+                <h3 class="info-panel-title">📊 串流資訊</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">解析度</span>
+                        <span class="info-value" id="mobile-resolution">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">畫質</span>
+                        <span class="info-value" id="mobile-quality">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">碼率</span>
+                        <span class="info-value" id="mobile-bitrate">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">已下載</span>
+                        <span class="info-value" id="mobile-downloaded">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">狀態</span>
+                        <span class="info-value" id="video-status">載入中...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script/main.js"></script>
+</body>
+
+</html>

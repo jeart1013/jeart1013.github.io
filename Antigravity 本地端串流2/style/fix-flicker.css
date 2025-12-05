@@ -1,0 +1,7 @@
+/* 修復影片滾動閃爍 */
+.video-background {
+    transform: translateZ(0) !important;
+    will-change: transform !important;
+    backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
+}

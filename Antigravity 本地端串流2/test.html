@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>診斷測試</title>
+    <style>
+        body {
+            background: #1a1a2e;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .test-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🔍 診斷測試頁面</h1>
+
+    <div class="test-box">
+        <h2>1. HTML 載入正常</h2>
+        <p>✅ 如果您看到這段文字，HTML 沒問題</p>
+    </div>
+
+    <div class="test-box">
+        <h2>2. CSS 載入正常</h2>
+        <p>✅ 如果背景是深色的，CSS 沒問題</p>
+    </div>
+
+    <div class="test-box">
+        <h2>3. JavaScript 測試</h2>
+        <p id="js-test">❌ JavaScript 未執行</p>
+    </div>
+
+    <div class="test-box">
+        <h2>4. 裝置偵測</h2>
+        <p id="device-test">檢測中...</p>
+    </div>
+
+    <div class="test-box">
+        <h2>5. 請按 F12 查看 Console</h2>
+        <p>如果有紅色錯誤訊息，請告訴我錯誤內容</p>
+    </div>
+
+    <script>
+        // 測試 1: JavaScript 基本功能
+        document.getElementById('js-test').textContent = '✅ JavaScript 正常執行';
+
+        // 測試 2: 裝置偵測
+        function isMobileDevice() {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            const mobileRegex = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+            return mobileRegex.test(userAgent);
+        }
+
+        const deviceType = isMobileDevice() ? '📱 手機' : '💻 PC';
+        document.getElementById('device-test').textContent = `偵測結果: ${deviceType}`;
+
+        console.log('✅ 測試頁面載入成功');
+        console.log('裝置類型:', deviceType);
+        console.log('視窗寬度:', window.innerWidth);
+    </script>
+</body>
+
+</html>
