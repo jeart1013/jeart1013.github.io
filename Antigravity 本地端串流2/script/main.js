@@ -71,14 +71,19 @@ function initializeVideoPlayer(platform) {
         return;
     }
 
+    // 根據平台設定不同的起始畫質
+    const startLevel = platform === 'mobile' ? 4 : 3;  // 手機:480p, PC:720p
+
     hls = new Hls({
-        startLevel: 1,  // 從 720p 開始（索引 1）
+        startLevel: startLevel,
         maxBufferLength: 10,        // 減少緩衝時間到 10 秒
         maxMaxBufferLength: 20,     // 最大 20 秒
         abrEwmaDefaultEstimate: 5000000,  // 預設帶寬 5 Mbps
         abrBandWidthFactor: 0.8,    // 降低帶寬保守系數（更積極切換）
         abrBandWidthUpFactor: 0.7   // 更容易升級
     });
+
+    console.log(`🎬 ${platform} 版起始畫質: ${platform === 'mobile' ? '480p' : '720p'}`);
 
     videoPlayer.muted = true;
     totalDownloaded = 0;
