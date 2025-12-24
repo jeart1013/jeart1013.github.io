@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>異象偵查隊-BOSS挑戰</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="game-container">
+        <!-- 遊戲標題 -->
+        <div class="game-title">
+            <img src="images/tittle.png" alt="異象偵查隊-BOSS挑戰">
+        </div>
+
+        <!-- 關卡顯示 -->
+        <div class="stage-info">
+            <span>關卡 <span id="currentStage">1</span></span>
+            <span>金幣: <span id="gold">0</span>G</span>
+        </div>
+
+        <!-- 戰鬥場景 -->
+        <div class="battle-field">
+            <!-- 怪物區域 -->
+            <div class="monster-area">
+                <div class="monster-sprite" id="monsterSprite">
+                    <img id="monsterImage" src="" alt="Monster" class="monster-img">
+                </div>
+                <div class="monster-info">
+                    <div class="name" id="monsterName">畫框怪</div>
+                    <div class="hp-bar">
+                        <div class="hp-fill" id="monsterHpBar"></div>
+                    </div>
+                    <div class="hp-text">
+                        <span id="monsterHp">30</span> / <span id="monsterMaxHp">30</span> HP
+                    </div>
+                </div>
+            </div>
+
+            <!-- 勇者區域 -->
+            <div class="hero-area">
+                <div class="hero-sprite">
+                    <img src="images/hero_01.png" alt="Hero" class="hero-img">
+                </div>
+                <div class="hero-info">
+                    <div class="name">初階調查員:娜娜莉</div>
+                    <div class="hp-bar">
+                        <div class="hp-fill hero-hp" id="heroHpBar"></div>
+                    </div>
+                    <div class="hp-text">
+                        <span id="heroHp">100</span> / <span id="heroMaxHp">100</span> HP
+                    </div>
+                    <div class="stats">
+                        <span>💪 攻擊: <span id="heroAtk">15</span></span>
+                        <span>🛡️ 防禦: <span id="heroDef">5</span></span>
+                        <span>⭐ 等級: <span id="heroLevel">1</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 訊息欄 -->
+        <div class="message-box" id="messageBox">
+            歡迎娜娜莉！準備好冒險了嗎？
+        </div>
+
+        <!-- 操作按鈕 -->
+        <div class="action-buttons">
+            <button class="btn btn-attack" id="attackBtn">⚔️ 攻擊</button>
+            <button class="btn btn-skill" id="skillBtn">✨ 技能 (MP: <span id="heroMp">20</span>)</button>
+            <button class="btn btn-heal" id="healBtn">💊 治療 (3次)</button>
+            <button class="btn btn-run" id="runBtn">🏃 逃跑</button>
+        </div>
+
+        <!-- 勝利/失敗畫面 -->
+        <div class="result-screen" id="resultScreen">
+            <div class="result-content">
+                <h2 id="resultTitle"></h2>
+                <p id="resultMessage"></p>
+                <button class="btn btn-primary" id="continueBtn"></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

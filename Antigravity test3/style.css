@@ -1,0 +1,554 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Microsoft JhengHei', 'Heiti TC', sans-serif;
+    font-weight: bold;
+    background: url('images/bg_01.jpg') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    padding: 20px;
+}
+
+.game-container {
+    max-width: 800px;
+    width: 100%;
+    background: rgba(44, 44, 84, 0.9);
+    border: 8px solid #40407a;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.game-title {
+    text-align: center;
+    margin-bottom: 20px;
+    animation: pulse 2s infinite;
+}
+
+.game-title img {
+    max-width: 100%;
+    height: auto;
+    max-height: 100px;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.stage-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    margin-bottom: 20px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+}
+
+.battle-field {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+    min-height: 300px;
+}
+
+.monster-area,
+.hero-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.monster-sprite,
+.hero-sprite {
+    position: relative;
+    animation: bounce 2s infinite;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.monster-img,
+.hero-img {
+    max-width: 100%;
+    max-height: 100%;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.monster-info,
+.hero-info {
+    width: 100%;
+    text-align: center;
+}
+
+.name {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    color: #ffd93d;
+}
+
+.hp-bar {
+    width: 100%;
+    height: 20px;
+    background: #222;
+    border: 3px solid #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+.hp-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff6b6b 0%, #ff8787 100%);
+    transition: width 0.5s ease;
+    width: 100%;
+}
+
+.hero-hp {
+    background: linear-gradient(90deg, #4cd137 0%, #6ab04c 100%);
+}
+
+.hp-text {
+    font-size: 0.7rem;
+    margin-bottom: 10px;
+}
+
+.stats {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 0.6rem;
+    margin-top: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.message-box {
+    background: #000;
+    border: 4px solid #fff;
+    border-radius: 8px;
+    padding: 20px;
+    min-height: 80px;
+    margin-bottom: 20px;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.action-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.btn {
+    font-family: 'Microsoft JhengHei', 'Heiti TC', sans-serif;
+    font-weight: bold;
+    padding: 15px 25px;
+    font-size: 0.8rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    color: #fff;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: visible;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+    margin: 5px;
+}
+
+.btn:hover:not(:disabled) {
+    transform: translateY(-3px) scale(1.05);
+    z-index: 1;
+}
+
+.btn:active:not(:disabled) {
+    transform: translateY(0) scale(0.95);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    filter: grayscale(100%);
+}
+
+.btn-attack {
+    background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+    box-shadow: 0 0 15px #00c6ff, 0 0 30px rgba(0, 198, 255, 0.4);
+}
+
+.btn-attack:hover:not(:disabled) {
+    box-shadow: 0 0 25px #00c6ff, 0 0 50px rgba(0, 198, 255, 0.6);
+}
+
+.btn-skill {
+    background: linear-gradient(135deg, #b721ff 0%, #21d4fd 100%);
+    box-shadow: 0 0 15px #b721ff, 0 0 30px rgba(183, 33, 255, 0.4);
+}
+
+.btn-skill:hover:not(:disabled) {
+    box-shadow: 0 0 25px #b721ff, 0 0 50px rgba(183, 33, 255, 0.6);
+}
+
+.btn-heal {
+    background: linear-gradient(135deg, #42e695 0%, #3bb2b8 100%);
+    box-shadow: 0 0 15px #42e695, 0 0 30px rgba(66, 230, 149, 0.4);
+}
+
+.btn-heal:hover:not(:disabled) {
+    box-shadow: 0 0 25px #42e695, 0 0 50px rgba(66, 230, 149, 0.6);
+}
+
+.btn-run {
+    background: linear-gradient(135deg, #434343 0%, #000000 100%);
+    box-shadow: 0 0 15px #434343, 0 0 30px rgba(67, 67, 67, 0.4);
+}
+
+.btn-run:hover:not(:disabled) {
+    box-shadow: 0 0 25px #434343, 0 0 50px rgba(67, 67, 67, 0.6);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #ffd93d 0%, #f6b93b 100%);
+    color: #000;
+    width: 100%;
+    margin-top: 20px;
+    box-shadow: 0 0 15px #ffd93d;
+}
+
+.result-screen {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.result-screen.show {
+    display: flex;
+    animation: fadeIn 0.5s;
+}
+
+.result-content {
+    background: #2c2c54;
+    border: 8px solid #40407a;
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    max-width: 500px;
+}
+
+.result-content h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #ffd93d;
+}
+
+.result-content p {
+    font-size: 0.8rem;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+.attacking {
+    animation: attack 0.5s;
+}
+
+@keyframes attack {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-20px);
+    }
+
+    75% {
+        transform: translateX(20px);
+    }
+}
+
+.damaged {
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-10px);
+    }
+
+    75% {
+        transform: translateX(10px);
+    }
+}
+
+/* ===== 攻擊特效 ===== */
+.slash-effect {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    pointer-events: none;
+    z-index: 100;
+}
+
+.slash-effect::before {
+    content: '⚔️';
+    position: absolute;
+    font-size: 4rem;
+    animation: slashAnimation 0.5s ease-out;
+    filter: drop-shadow(0 0 10px #fff);
+}
+
+@keyframes slashAnimation {
+    0% {
+        opacity: 0;
+        transform: scale(0) rotate(0deg);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.5) rotate(180deg);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(0.5) rotate(360deg);
+    }
+}
+
+.fireball-effect {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    top: 50%;
+    left: -100px;
+    animation: fireballFly 1s ease-in-out;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.fireball-effect::before {
+    content: '🔥';
+    position: absolute;
+    font-size: 3rem;
+    filter: drop-shadow(0 0 20px orange);
+}
+
+@keyframes fireballFly {
+    0% {
+        left: -100px;
+        transform: scale(0.5);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        left: 50%;
+        transform: scale(2) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.damage-number {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ff6b6b;
+    text-shadow: 2px 2px 4px #000, 0 0 10px #ff0000;
+    animation: damageFloat 1s ease-out;
+    pointer-events: none;
+    z-index: 101;
+}
+
+.damage-number.critical {
+    color: #ffd93d;
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px #000, 0 0 20px #ffd93d;
+}
+
+.damage-number.heal {
+    color: #4cd137;
+    text-shadow: 2px 2px 4px #000, 0 0 10px #4cd137;
+}
+
+@keyframes damageFloat {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(0) scale(0.5);
+    }
+
+    30% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(-20px) scale(1.2);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-80px) scale(0.8);
+    }
+}
+
+.flash-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
+    animation: flashAnimation 0.3s ease-out;
+    pointer-events: none;
+    z-index: 99;
+}
+
+@keyframes flashAnimation {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .game-title {
+        font-size: 1rem;
+    }
+
+    .battle-field {
+        grid-template-columns: 1fr;
+    }
+
+    .monster-emoji,
+    .hero-emoji {
+        font-size: 3rem;
+    }
+
+    .action-buttons {
+        grid-template-columns: 1fr;
+    }
+
+    .btn {
+        font-size: 0.6rem;
+        padding: 12px;
+    }
+
+    .damage-number {
+        font-size: 1.5rem;
+    }
+
+    .slash-effect::before {
+        font-size: 2.5rem;
+    }
+}
+
+/* Level Up Animation */
+.level-up-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    font-weight: bold;
+    color: #ffd93d;
+    text-shadow: 0 0 10px #ff9f43, 0 0 20px #ff9f43;
+    animation: levelUpAnim 2s ease-out forwards;
+    z-index: 1000;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+@keyframes levelUpAnim {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, 0) scale(0.5);
+    }
+
+    20% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+
+    80% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -100%) scale(1.5);
+    }
+}
