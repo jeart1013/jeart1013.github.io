@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYBER REALM | Immersive Game Experience</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Ionicons for better icons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <nav>
+                <div class="logo">CYBER REALM</div>
+                <div class="menu">
+                    <a href="#" data-text="首頁">首頁</a>
+                    <a href="#features" data-text="遊戲特色">遊戲特色</a>
+                    <a href="#characters" data-text="角色介紹">角色介紹</a>
+                    <a href="#" data-text="社群">社群</a>
+                </div>
+                <div class="hamburger"><ion-icon name="menu-outline"></ion-icon></div>
+            </nav>
+        </header>
+
+        <!-- KV / Hero Section -->
+        <div class="hero">
+            <div class="hero-content">
+                <h1>未來戰線<br>CYBER REALM</h1>
+                <p>沉浸在霓虹閃爍的賽博龐克世界，體驗前所未有的極致戰鬥與探索。</p>
+                <div class="hero-btns">
+                    <button class="cta-btn">立即遊玩</button>
+                    <button id="trailer-btn" class="cta-btn outline">
+                        <ion-icon name="play-circle-outline"
+                            style="vertical-align: middle; margin-right: 5px;"></ion-icon>
+                        看影片
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <main>
+            <!-- 3 Column Content -->
+            <section id="features" class="features-section">
+                <div class="feature-card">
+                    <div class="card-icon">
+                        <ion-icon name="game-controller-outline"></ion-icon>
+                    </div>
+                    <h3>極致操控</h3>
+                    <p>專為競技玩家打造的流暢戰鬥系統，每一個動作都精準無比，帶來爽快的打擊感。</p>
+                    <a href="#" class="btn-small">了解更多 -></a>
+                </div>
+                <div class="feature-card">
+                    <div class="card-icon">
+                        <ion-icon name="planet-outline"></ion-icon>
+                    </div>
+                    <h3>開放世界</h3>
+                    <p>探索無縫連接的巨大都市，從底層貧民窟到高層企業塔，每個角落都隱藏著秘密。</p>
+                    <a href="#" class="btn-small">查看地圖 -></a>
+                </div>
+                <div class="feature-card">
+                    <div class="card-icon">
+                        <ion-icon name="people-outline"></ion-icon>
+                    </div>
+                    <h3>多人連線</h3>
+                    <p>與全球玩家組隊執行任務，或在競技場中一決高下，展現你的戰術與實力。</p>
+                    <a href="#" class="btn-small">加入社群 -></a>
+                </div>
+            </section>
+
+            <!-- Carousel Section -->
+            <section id="characters" class="carousel-section">
+                <h2 class="section-title">角色檔案</h2>
+                <div class="carousel-container">
+                    <button class="carousel-btn prev-btn">
+                        <ion-icon name="chevron-back-outline"></ion-icon>
+                    </button>
+                    <button class="carousel-btn next-btn">
+                        <ion-icon name="chevron-forward-outline"></ion-icon>
+                    </button>
+
+                    <div class="carousel-track">
+                        <div class="carousel-slide">
+                            <img src="char_v.png" alt="Hero V">
+                            <div class="slide-content">
+                                <h2>V - 傭兵</h2>
+                                <p>街頭出身的傳奇傭兵，精通各類槍械與駭客技術。</p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="char_lucy.png" alt="Lucy Netrunner">
+                            <div class="slide-content">
+                                <h2>Lucy - 頂尖駭客</h2>
+                                <p>神秘的頂級駭客，能在數位空間中自由穿梭。</p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="char_david.png" alt="David Legend">
+                            <div class="slide-content">
+                                <h2>David - 傳奇</h2>
+                                <p>為了夢想燃燒殆盡的夜城傳奇，以肉身對抗企業巨獸。</p>
+                            </div>
+                        </div>
+                        <!-- New Character 1021 -->
+                        <div class="carousel-slide">
+                            <img src="char_1021.jpg" alt="1021 Shadow Assassin">
+                            <div class="slide-content">
+                                <h2>1021 - 暗影刺客</h2>
+                                <p>無聲無息的致命幽靈，在霓虹陰影中執行絕對正義。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>CYBER REALM</h4>
+                    <p style="color: grey;">The future is now.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>探索</h4>
+                    <ul>
+                        <li><a href="#">最新消息</a></li>
+                        <li><a href="#">更新日誌</a></li>
+                        <li><a href="#">常見問題</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>法律資訊</h4>
+                    <ul>
+                        <li><a href="#">隱私權政策</a></li>
+                        <li><a href="#">使用者條款</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>追蹤我們</h4>
+                    <div style="display: flex; gap: 10px; font-size: 1.5rem; color: white;">
+                        <ion-icon name="logo-twitter"></ion-icon>
+                        <ion-icon name="logo-facebook"></ion-icon>
+                        <ion-icon name="logo-instagram"></ion-icon>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 CYBER REALM Games. All rights reserved.
+            </div>
+        </footer>
+    </div>
+
+    <div class="video-modal">
+        <div class="modal-content">
+            <div class="close-modal"><ion-icon name="close-circle-outline"></ion-icon></div>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/8X2kIfS6fb8?enablejsapi=1"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
