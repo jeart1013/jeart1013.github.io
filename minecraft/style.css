@@ -1,0 +1,845 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+:root {
+    --mc-green: #3b8526;
+    --mc-dirt: #5d3a1a;
+    --mc-stone: #7d7d7d;
+    --mc-dark: #1a1a1a;
+    --mc-light: #ffffff;
+    --mc-gold: #fcc200;
+    --mc-diamond: #4deeea;
+    --font-pixel: 'VT323', monospace;
+    --border-thick: 4px solid #000;
+    --shadow-block: 4px 4px 0px #000;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-pixel);
+    background-color: #121212;
+    color: var(--mc-light);
+    overflow-x: hidden;
+    line-height: 1.2;
+}
+
+/* Cinematic Header */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent);
+    padding: 1rem 2rem;
+    transition: 0.3s;
+}
+
+header.scrolled {
+    background: rgba(0, 0, 0, 0.8);
+    border-bottom: var(--border-thick);
+}
+
+nav {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 2.5rem;
+    color: var(--mc-light);
+    text-shadow: 2px 2px 0 #3f3f3f;
+    letter-spacing: 2px;
+}
+
+.menu {
+    display: flex;
+    gap: 2rem;
+}
+
+.menu a {
+    color: var(--mc-light);
+    text-decoration: none;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    position: relative;
+    padding: 5px 10px;
+    transition: 0.2s;
+}
+
+.menu a:hover {
+    color: var(--mc-gold);
+    text-shadow: 2px 2px 0 #000;
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid var(--mc-light);
+}
+
+/* Cinematic Hero */
+.hero {
+    height: 100vh;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(18, 18, 18, 1)), url('mc_hero_bg.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+}
+
+.hero-content {
+    max-width: 800px;
+    padding: 2rem;
+    z-index: 2;
+}
+
+.hero h1 {
+    font-size: 5rem;
+    color: var(--mc-light);
+    text-shadow: 4px 4px 0 #000, 0 0 20px rgba(0, 0, 0, 0.5);
+    margin-bottom: 1rem;
+    line-height: 1;
+}
+
+.hero p {
+    font-size: 2rem;
+    color: #ddd;
+    text-shadow: 2px 2px 0 #000;
+    margin-bottom: 3rem;
+}
+
+/* Minecraft Button Style */
+.mc-btn {
+    display: inline-block;
+    padding: 1rem 3rem;
+    background: #7d7d7d;
+    border: var(--border-thick);
+    color: #fff;
+    font-family: var(--font-pixel);
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    box-shadow: inset -4px -4px 0px rgba(0, 0, 0, 0.5), inset 4px 4px 0px rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: 0.1s;
+    margin: 10px;
+}
+
+.mc-btn:active {
+    box-shadow: inset 4px 4px 0px rgba(0, 0, 0, 0.5);
+    transform: translateY(4px);
+}
+
+.mc-btn.green {
+    background: var(--mc-green);
+}
+
+.mc-btn:hover {
+    filter: brightness(1.2);
+}
+
+/* Features Section */
+.features-section {
+    padding: 5rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+}
+
+.feature-card {
+    background: #2a2a2a;
+    border: var(--border-thick);
+    padding: 2rem;
+    text-align: center;
+    box-shadow: var(--shadow-block);
+    transition: 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--mc-diamond);
+}
+
+.feature-card h3 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--mc-gold);
+}
+
+.feature-card p {
+    font-size: 1.5rem;
+    color: #aaa;
+}
+
+/* Carousel */
+.carousel-section {
+    padding: 5rem 0;
+    text-align: center;
+    background: url('https://www.transparenttextures.com/patterns/cubes.png');
+    /* Subtle texture */
+}
+
+.carousel-section h2 {
+    font-size: 4rem;
+    margin-bottom: 3rem;
+    text-shadow: 3px 3px 0 #000;
+}
+
+.carousel-container {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    overflow: hidden;
+    border: var(--border-thick);
+    box-shadow: var(--shadow-block);
+    aspect-ratio: 16/9;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    height: 100%;
+}
+
+.carousel-slide {
+    min-width: 100%;
+    position: relative;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slide-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 2rem;
+    text-align: left;
+    border-top: var(--border-thick);
+}
+
+.slide-content h2 {
+    font-size: 3rem;
+    color: var(--mc-diamond);
+}
+
+.slide-content p {
+    font-size: 1.5rem;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid #fff;
+    color: #fff;
+    font-size: 2rem;
+    padding: 1rem;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.prev-btn {
+    left: 0;
+}
+
+.next-btn {
+    right: 0;
+}
+
+/* Default Hidden States */
+.hamburger {
+    display: none;
+}
+
+.mobile-only {
+    display: none;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 3.5rem;
+    }
+
+    .hero p {
+        font-size: 1.5rem;
+    }
+
+    .menu {
+        display: none;
+        /* Hide default menu */
+        flex-direction: column;
+        position: fixed;
+        background: rgba(0, 0, 0, 0.95);
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+    }
+
+    .menu.active {
+        display: flex;
+    }
+
+    .carousel-container {
+        aspect-ratio: 1/1;
+        /* Square for mobile chars */
+    }
+
+    .carousel-slide img {
+        object-fit: cover;
+        object-position: top;
+    }
+
+    .hamburger {
+        display: block;
+        font-size: 2rem;
+        cursor: pointer;
+        z-index: 1001;
+        /* Ensure above menu overlay */
+    }
+
+    .desktop-only {
+        display: none !important;
+    }
+
+    .mobile-only {
+        display: block !important;
+    }
+}
+
+/* News Section Cards */
+.news-card {
+    text-align: left;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    background: #1e1e1e;
+}
+
+.news-card img {
+    transition: 0.3s;
+}
+
+.news-card:hover img {
+    transform: scale(1.05);
+}
+
+.news-card h3 {
+    font-size: 2rem;
+    margin: 1rem;
+    color: var(--mc-light);
+}
+
+.news-card p {
+    font-size: 1.2rem;
+    margin: 0 1rem 1.5rem 1rem;
+}
+
+.date-tag {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: 2px solid #000;
+    font-weight: bold;
+    box-shadow: 2px 2px 0 #000;
+}
+
+/* Language Switcher Button */
+.lang-switch {
+    transition: 0.2s;
+}
+
+.lang-switch:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    text-shadow: 0 0 5px #fff;
+}
+
+/* Video Modal */
+.video-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+}
+
+.video-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    cursor: pointer;
+}
+
+.modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 900px;
+    background: #000;
+    border: var(--border-thick);
+    box-shadow: var(--shadow-block);
+    z-index: 2001;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    /* 16:9 */
+    height: 0;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.close-btn {
+    position: absolute;
+    top: -40px;
+    right: -10px;
+    font-size: 3rem;
+    color: #fff;
+    cursor: pointer;
+    line-height: 1;
+    transition: 0.2s;
+}
+
+.close-btn:hover {
+    color: var(--mc-gold);
+}
+
+/* ================================
+   Mining Mini-Game Styles
+================================ */
+.game-section {
+    padding: 5rem 2rem;
+    background: linear-gradient(180deg, #1a1a1a 0%, #2d1f0f 50%, #1a1a1a 100%);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.game-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('https://www.transparenttextures.com/patterns/cubes.png');
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.game-section h2 {
+    font-size: 4rem;
+    text-shadow: 4px 4px 0 #000;
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.game-subtitle {
+    font-size: 1.5rem;
+    color: #aaa;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.game-container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* Score Panel */
+.score-panel {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.score-item {
+    background: #2a2a2a;
+    border: 4px solid #555;
+    padding: 1rem 2rem;
+    min-width: 150px;
+    box-shadow: inset -4px -4px 0 rgba(0, 0, 0, 0.5), inset 4px 4px 0 rgba(255, 255, 255, 0.1);
+}
+
+.score-label {
+    display: block;
+    font-size: 1rem;
+    color: #888;
+    margin-bottom: 0.3rem;
+}
+
+.score-value {
+    display: block;
+    font-size: 2.5rem;
+    color: var(--mc-gold);
+    text-shadow: 2px 2px 0 #000;
+}
+
+.score-value.combo {
+    color: var(--mc-diamond);
+}
+
+/* Mining Area */
+.mining-area {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 2rem;
+}
+
+.mine-block {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #8b8b8b 0%, #6d6d6d 50%, #5a5a5a 100%);
+    border: 4px solid #000;
+    box-shadow:
+        inset 8px 8px 0 rgba(255, 255, 255, 0.3),
+        inset -8px -8px 0 rgba(0, 0, 0, 0.4),
+        8px 8px 0 #000;
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><text y="24" font-size="24">⛏️</text></svg>'), pointer;
+    position: relative;
+    transition: transform 0.05s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mine-block:active {
+    transform: scale(0.95);
+}
+
+.mine-block.shake {
+    animation: blockShake 0.1s ease-in-out;
+}
+
+@keyframes blockShake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px) rotate(-2deg);
+    }
+
+    75% {
+        transform: translateX(5px) rotate(2deg);
+    }
+}
+
+.mine-block.breaking {
+    animation: blockBreak 0.3s ease-out forwards;
+}
+
+@keyframes blockBreak {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+/* Block Types */
+.mine-block.stone {
+    background: linear-gradient(135deg, #8b8b8b 0%, #6d6d6d 50%, #5a5a5a 100%);
+}
+
+.mine-block.coal {
+    background: linear-gradient(135deg, #4a4a4a 0%, #2d2d2d 50%, #1a1a1a 100%);
+}
+
+.mine-block.iron {
+    background: linear-gradient(135deg, #c4a47c 0%, #a38d6d 50%, #8a7860 100%);
+}
+
+.mine-block.gold {
+    background: linear-gradient(135deg, #ffd700 0%, #daa520 50%, #b8860b 100%);
+}
+
+.mine-block.diamond {
+    background: linear-gradient(135deg, #7df9ff 0%, #40e0d0 50%, #00ced1 100%);
+}
+
+.mine-block.emerald {
+    background: linear-gradient(135deg, #50c878 0%, #3cb371 50%, #2e8b57 100%);
+}
+
+/* Block Cracks */
+.block-cracks {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.block-cracks.crack-1 {
+    opacity: 0.2;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M30 0 L35 30 L20 50 L40 100" stroke="black" stroke-width="3" fill="none"/></svg>');
+}
+
+.block-cracks.crack-2 {
+    opacity: 0.4;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M30 0 L35 30 L20 50 L40 100 M70 0 L60 40 L80 70 L65 100" stroke="black" stroke-width="3" fill="none"/></svg>');
+}
+
+.block-cracks.crack-3 {
+    opacity: 0.6;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M30 0 L35 30 L20 50 L40 100 M70 0 L60 40 L80 70 L65 100 M50 30 L30 60" stroke="black" stroke-width="4" fill="none"/></svg>');
+}
+
+.block-hp {
+    font-size: 3rem;
+    color: #fff;
+    text-shadow: 3px 3px 0 #000;
+    position: relative;
+    z-index: 2;
+}
+
+/* Floating Rewards */
+.floating-rewards {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: visible;
+}
+
+.floating-reward {
+    position: absolute;
+    font-size: 1.5rem;
+    font-weight: bold;
+    animation: floatUp 1s ease-out forwards;
+    text-shadow: 2px 2px 0 #000;
+    white-space: nowrap;
+}
+
+@keyframes floatUp {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-80px) scale(1.2);
+    }
+}
+
+/* Inventory Panel */
+.inventory-panel {
+    background: #3b3b3b;
+    border: 4px solid #000;
+    padding: 1.5rem;
+    box-shadow: 8px 8px 0 #000;
+}
+
+.inventory-panel h3 {
+    font-size: 1.8rem;
+    color: var(--mc-light);
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 0 #000;
+}
+
+.inventory-grid {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.inv-slot {
+    width: 70px;
+    height: 70px;
+    background: #1a1a1a;
+    border: 3px solid #555;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: inset -3px -3px 0 rgba(0, 0, 0, 0.5), inset 3px 3px 0 rgba(255, 255, 255, 0.1);
+}
+
+.inv-slot:hover {
+    border-color: var(--mc-gold);
+}
+
+.ore-icon {
+    width: 35px;
+    height: 35px;
+    border: 2px solid #000;
+    margin-bottom: 3px;
+}
+
+.ore-icon.coal {
+    background: linear-gradient(135deg, #333 0%, #1a1a1a 100%);
+    box-shadow: inset 2px 2px 0 #555;
+}
+
+.ore-icon.iron {
+    background: linear-gradient(135deg, #ddd 0%, #bbb 100%);
+    box-shadow: inset 2px 2px 0 #fff;
+}
+
+.ore-icon.gold {
+    background: linear-gradient(135deg, #ffd700 0%, #daa520 100%);
+    box-shadow: inset 2px 2px 0 #ffed4a;
+}
+
+.ore-icon.diamond {
+    background: linear-gradient(135deg, #7df9ff 0%, #40e0d0 100%);
+    box-shadow: inset 2px 2px 0 #b4fcff;
+}
+
+.ore-icon.emerald {
+    background: linear-gradient(135deg, #50c878 0%, #2e8b57 100%);
+    box-shadow: inset 2px 2px 0 #90ee90;
+}
+
+.ore-count {
+    font-size: 1rem;
+    color: #fff;
+    text-shadow: 1px 1px 0 #000;
+}
+
+/* Game Controls */
+.game-controls {
+    margin-top: 2rem;
+}
+
+.game-btn {
+    font-size: 1.5rem;
+    padding: 0.8rem 2rem;
+}
+
+/* Particle Effects */
+.particle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    pointer-events: none;
+    animation: particleFly 0.6s ease-out forwards;
+}
+
+@keyframes particleFly {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(var(--tx), var(--ty)) scale(0);
+    }
+}
+
+/* Ore Found Animation */
+.ore-found {
+    animation: oreGlow 0.5s ease-in-out;
+}
+
+@keyframes oreGlow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px currentColor;
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .game-section h2 {
+        font-size: 2.5rem;
+    }
+
+    .mining-area {
+        width: 150px;
+        height: 150px;
+    }
+
+    .score-panel {
+        gap: 1rem;
+    }
+
+    .score-item {
+        min-width: 100px;
+        padding: 0.8rem 1rem;
+    }
+
+    .score-value {
+        font-size: 1.8rem;
+    }
+
+    .inv-slot {
+        width: 55px;
+        height: 55px;
+    }
+
+    .ore-icon {
+        width: 28px;
+        height: 28px;
+    }
+}

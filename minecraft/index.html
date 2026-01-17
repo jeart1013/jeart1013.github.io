@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MINECRAFT REALM - Cinematic Adventure</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Ionicons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">MINECRAFT REALM</div>
+            <div class="menu">
+                <a href="#" data-lang-en="Home" data-lang-zh="首頁">Home</a>
+                <a href="#features" data-lang-en="Features" data-lang-zh="特色">Features</a>
+                <a href="#news" data-lang-en="News" data-lang-zh="新聞">News</a>
+                <a href="#community" data-lang-en="Community" data-lang-zh="社群">Community</a>
+                <a href="#shop" style="color: var(--mc-gold);" data-lang-en="Get Minecraft" data-lang-zh="購買遊戲">Get
+                    Minecraft</a>
+                <!-- Mobile Language Button (Visible only on mobile) -->
+                <button class="lang-switch mobile-only"
+                    style="margin-top: 1rem; padding: 5px 10px; background: transparent; border: 2px solid #fff; color: #fff; cursor: pointer; font-family: inherit;">EN/中文</button>
+            </div>
+            <!-- Desktop Language Button (Hidden on mobile) -->
+            <button class="lang-switch desktop-only"
+                style="margin-left: 20px; padding: 5px 10px; background: transparent; border: 2px solid #fff; color: #fff; cursor: pointer; font-family: inherit;">EN/中文</button>
+            <div class="hamburger">
+                <ion-icon name="menu-outline"></ion-icon>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-content">
+            <h1 data-lang-en="BUILD YOUR LEGEND" data-lang-zh="創造你的傳奇">BUILD YOUR LEGEND</h1>
+            <p data-lang-en="Explore infinite worlds and build everything from the simplest of homes to the grandest of castles."
+                data-lang-zh="探索無限世界，建造從最簡單的家園到最宏偉城堡的一切。">Explore infinite worlds and build everything from the simplest
+                of homes to the grandest of castles.</p>
+            <a href="#shop" class="mc-btn green" data-lang-en="Start Survival" data-lang-zh="開始生存">Start Survival</a>
+            <a href="#" class="mc-btn video-trigger" data-lang-en="Watch Trailer" data-lang-zh="觀看預告">Watch Trailer</a>
+        </div>
+    </div>
+
+    <!-- Video Modal -->
+    <div class="video-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div class="video-container">
+                <iframe id="video-frame" width="560" height="315"
+                    src="https://www.youtube.com/embed/MmB9b5njVbA?enablejsapi=1" title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- News Section -->
+    <section id="news" class="features-section" style="padding-bottom: 0;">
+        <h2 style="grid-column: 1/-1; text-align: center; font-size: 3rem; margin-bottom: 1rem;"
+            data-lang-en="LATEST NEWS" data-lang-zh="最新消息">LATEST NEWS</h2>
+
+        <div class="feature-card news-card">
+            <img src="mc_news_update.png" alt="Update"
+                style="width: 100%; height: 200px; object-fit: cover; margin-bottom: 1rem; border-bottom: 4px solid #000;">
+            <span class="date-tag"
+                style="background: var(--mc-gold); color: #000; padding: 2px 5px; font-size: 1rem;">2024-06-12</span>
+            <h3 data-lang-en="The Tricky Trials Update" data-lang-zh="棘手試煉更新">The Tricky Trials Update</h3>
+            <p data-lang-en="Discover new copper dungeons, ominous trials, and the crafter block!"
+                data-lang-zh="探索全新的銅地牢、凶兆試煉和合成器方塊！">Discover new copper dungeons, ominous trials, and the crafter block!
+            </p>
+        </div>
+        <div class="feature-card news-card">
+            <img src="mc_community_castle.png" alt="Marketplace"
+                style="width: 100%; height: 200px; object-fit: cover; margin-bottom: 1rem; border-bottom: 4px solid #000;">
+            <span class="date-tag"
+                style="background: var(--mc-diamond); color: #000; padding: 2px 5px; font-size: 1rem;">2024-06-01</span>
+            <h3 data-lang-en="Marketplace Summer Sale" data-lang-zh="市集夏日特賣">Marketplace Summer Sale</h3>
+            <p data-lang-en="Get up to 75% off on selected worlds, skins, and texture packs."
+                data-lang-zh="精選世界、外觀和材質包低至 25 折優惠。">Get up to 75% off on selected worlds, skins, and texture packs.</p>
+        </div>
+        <div class="feature-card news-card">
+            <img src="mc_char_steve.png" alt="Community"
+                style="width: 100%; height: 200px; object-fit: cover; object-position: top; margin-bottom: 1rem; border-bottom: 4px solid #000;">
+            <span class="date-tag"
+                style="background: var(--mc-green); color: #fff; padding: 2px 5px; font-size: 1rem;">2024-05-20</span>
+            <h3 data-lang-en="Minecraft Monthly" data-lang-zh="Minecraft 月報">Minecraft Monthly</h3>
+            <p data-lang-en="Catch up on everything that happened in the blocky world this month."
+                data-lang-zh="掌握本月方塊世界發生的大小事。">Catch up on everything that happened in the blocky world this month.</p>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section id="community" class="carousel-section" style="background: none; padding-top: 2rem;">
+        <h2 data-lang-en="COMMUNITY CREATIONS" data-lang-zh="社群創作">COMMUNITY CREATIONS</h2>
+        <div
+            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+            <div style="border: 4px solid #fff; position: relative;">
+                <img src="mc_community_castle.png" style="width: 100%; display: block;" alt="Castle">
+                <div style="position: absolute; bottom: 0; background: rgba(0,0,0,0.8); width: 100%; padding: 1rem;">
+                    <h3 style="color: var(--mc-gold);">Epic Castle</h3>
+                    <p>by BuilderKing99</p>
+                </div>
+            </div>
+            <div style="border: 4px solid #fff; position: relative;">
+                <img src="mc_community_city.png" style="width: 100%; display: block;" alt="City">
+                <div style="position: absolute; bottom: 0; background: rgba(0,0,0,0.8); width: 100%; padding: 1rem;">
+                    <h3 style="color: var(--mc-diamond);">Cyberpunk City</h3>
+                    <p>by NeonBlock</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Edition Comparison -->
+    <section id="shop" style="padding: 5rem 2rem; background: #1a1a1a; text-align: center;">
+        <h2 style="font-size: 4rem; margin-bottom: 3rem;" data-lang-en="CHOOSE YOUR EDITION" data-lang-zh="選擇你的版本">
+            CHOOSE YOUR EDITION</h2>
+        <div
+            style="display: flex; flex-wrap: wrap; justify-content: center; gap: 4rem; max-width: 1200px; margin: 0 auto;">
+            <!-- Java -->
+            <div style="background: #2b2b2b; padding: 2rem; border: 4px solid #555; max-width: 400px; flex: 1;">
+                <img src="mc_icon_java.png" style="width: 150px; margin-bottom: 1rem;" alt="Java">
+                <h3 style="font-size: 2.5rem; color: #4deeea;">JAVA EDITION</h3>
+                <ul style="text-align: left; margin: 2rem 0; font-size: 1.2rem; list-style: none;">
+                    <li style="margin-bottom: 0.5rem;">✅ PC / Mac / Linux</li>
+                    <li style="margin-bottom: 0.5rem;">✅ Advanced Modding</li>
+                    <li style="margin-bottom: 0.5rem;">✅ Snapshot Updates</li>
+                </ul>
+                <a href="#" class="mc-btn green" style="width: 100%;" data-lang-en="Buy Java"
+                    data-lang-zh="購買 Java 版">Buy Java</a>
+            </div>
+            <!-- Bedrock -->
+            <div style="background: #2b2b2b; padding: 2rem; border: 4px solid #555; max-width: 400px; flex: 1;">
+                <img src="mc_icon_bedrock.png" style="width: 150px; margin-bottom: 1rem;" alt="Bedrock">
+                <h3 style="font-size: 2.5rem; color: #a0a0a0;">BEDROCK EDITION</h3>
+                <ul style="text-align: left; margin: 2rem 0; font-size: 1.2rem; list-style: none;">
+                    <li style="margin-bottom: 0.5rem;">✅ Multi-Platform (Console/Mobile/PC)</li>
+                    <li style="margin-bottom: 0.5rem;">✅ Cross-Play</li>
+                    <li style="margin-bottom: 0.5rem;">✅ Marketplace</li>
+                </ul>
+                <a href="#" class="mc-btn" style="width: 100%;" data-lang-en="Buy Bedrock" data-lang-zh="購買基岩版">Buy
+                    Bedrock</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="features-section">
+        <div class="feature-card">
+            <ion-icon name="cube-outline" style="font-size: 3rem; color: #74C365; margin-bottom: 1rem;"></ion-icon>
+            <h3 data-lang-en="Infinite Worlds" data-lang-zh="無限世界">Infinite Worlds</h3>
+            <p data-lang-en="Procedurally generated terrain that stretches beyond the horizon. Every world is a new adventure."
+                data-lang-zh="程序生成的地形延伸至地平線之外。每一個世界都是新的冒險。">Procedurally generated terrain that stretches beyond the
+                horizon. Every world is a new adventure.</p>
+        </div>
+        <div class="feature-card">
+            <ion-icon name="hammer-outline" style="font-size: 3rem; color: #8B4513; margin-bottom: 1rem;"></ion-icon>
+            <h3 data-lang-en="Craft & Create" data-lang-zh="合成與創造">Craft & Create</h3>
+            <p data-lang-en="Gather resources and craft tools, weapons, and armor. Your imagination is the only limit."
+                data-lang-zh="收集資源並合成工具、武器和盔甲。你的想像力是唯一的限制。">Gather resources and craft tools, weapons, and armor. Your
+                imagination is the only limit.</p>
+        </div>
+        <div class="feature-card">
+            <ion-icon name="skull-outline" style="font-size: 3rem; color: #ab1818; margin-bottom: 1rem;"></ion-icon>
+            <h3 data-lang-en="Survive the Night" data-lang-zh="生存挑戰">Survive the Night</h3>
+            <p data-lang-en="When the sun sets, the monsters come out. Build shelter or fight back to survive."
+                data-lang-zh="當太陽下山，怪物就會出現。建造避難所或反擊以生存。">When the sun sets, the monsters come out. Build shelter or
+                fight back to survive.</p>
+        </div>
+    </section>
+
+    <!-- Mining Mini-Game Section -->
+    <section id="mining-game" class="game-section">
+        <h2 data-lang-en="⛏️ MINING CHALLENGE ⛏️" data-lang-zh="⛏️ 挖礦挑戰 ⛏️">⛏️ MINING CHALLENGE ⛏️</h2>
+        <p class="game-subtitle" data-lang-en="Click to mine! Collect rare ores and beat high scores!"
+            data-lang-zh="點擊挖礦！收集稀有礦石，挑戰最高分！">Click to mine! Collect rare ores and beat high scores!</p>
+
+        <div class="game-container">
+            <!-- Score Panel -->
+            <div class="score-panel">
+                <div class="score-item">
+                    <span class="score-label" data-lang-en="SCORE" data-lang-zh="分數">SCORE</span>
+                    <span class="score-value" id="current-score">0</span>
+                </div>
+                <div class="score-item">
+                    <span class="score-label" data-lang-en="HIGH SCORE" data-lang-zh="最高分">HIGH SCORE</span>
+                    <span class="score-value" id="high-score">0</span>
+                </div>
+                <div class="score-item">
+                    <span class="score-label" data-lang-en="COMBO" data-lang-zh="連擊">COMBO</span>
+                    <span class="score-value combo" id="combo-display">x1</span>
+                </div>
+            </div>
+
+            <!-- Mining Area -->
+            <div class="mining-area" id="mining-area">
+                <div class="mine-block" id="mine-block">
+                    <div class="block-cracks" id="block-cracks"></div>
+                    <span class="block-hp" id="block-hp">10</span>
+                </div>
+                <div class="floating-rewards" id="floating-rewards"></div>
+            </div>
+
+            <!-- Inventory -->
+            <div class="inventory-panel">
+                <h3 data-lang-en="INVENTORY" data-lang-zh="物品欄">INVENTORY</h3>
+                <div class="inventory-grid">
+                    <div class="inv-slot" data-ore="coal">
+                        <div class="ore-icon coal"></div>
+                        <span class="ore-count" id="coal-count">0</span>
+                    </div>
+                    <div class="inv-slot" data-ore="iron">
+                        <div class="ore-icon iron"></div>
+                        <span class="ore-count" id="iron-count">0</span>
+                    </div>
+                    <div class="inv-slot" data-ore="gold">
+                        <div class="ore-icon gold"></div>
+                        <span class="ore-count" id="gold-count">0</span>
+                    </div>
+                    <div class="inv-slot" data-ore="diamond">
+                        <div class="ore-icon diamond"></div>
+                        <span class="ore-count" id="diamond-count">0</span>
+                    </div>
+                    <div class="inv-slot" data-ore="emerald">
+                        <div class="ore-icon emerald"></div>
+                        <span class="ore-count" id="emerald-count">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Controls -->
+            <div class="game-controls">
+                <button class="mc-btn green game-btn" id="reset-game" data-lang-en="Reset Game"
+                    data-lang-zh="重新開始">Reset Game</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section style="background: url('mc_hero_bg.png') center/cover fixed; padding: 5rem 2rem; position: relative;">
+        <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.8);"></div>
+        <div
+            style="position: relative; max-width: 600px; margin: 0 auto; text-align: center; border: 4px solid #5d3a1a; background: #3b2510; padding: 3rem;">
+            <h2 data-lang-en="STAY UPDATED" data-lang-zh="訂閱更新">STAY UPDATED</h2>
+            <p style="margin-bottom: 2rem; color: #ccc;"
+                data-lang-en="Sign up for our newsletter to get the latest news, updates, and offers."
+                data-lang-zh="訂閱我們的電子報，獲取最新新聞、更新和優惠。">Sign up for our newsletter to get the latest news, updates, and
+                offers.</p>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <input type="email" placeholder="Steve@minecraft.net"
+                    style="flex: 1; padding: 1rem; font-family: inherit; font-size: 1.2rem; background: #1a1a1a; border: 2px solid #7d7d7d; color: #fff;">
+                <button class="mc-btn green" style="margin: 0; font-size: 1.2rem;" data-lang-en="Sign Up"
+                    data-lang-zh="訂閱">Sign Up</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Character Carousel -->
+    <section id="characters" class="carousel-section">
+        <h2>HEROES & MOBS</h2>
+        <div class="carousel-container">
+            <div class="carousel-track">
+                <!-- Steve -->
+                <div class="carousel-slide">
+                    <img src="mc_char_steve.png" alt="Steve">
+                    <div class="slide-content">
+                        <h2>STEVE</h2>
+                        <p>The original survivor. Master of crafting and combat.</p>
+                    </div>
+                </div>
+                <!-- Alex -->
+                <div class="carousel-slide">
+                    <img src="mc_char_alex.png" alt="Alex">
+                    <div class="slide-content">
+                        <h2>ALEX</h2>
+                        <p>Explorer and warrior. Ready for any challenge in the wild.</p>
+                    </div>
+                </div>
+                <!-- Creeper -->
+                <div class="carousel-slide">
+                    <img src="mc_char_creeper.png" alt="Creeper">
+                    <div class="slide-content">
+                        <h2 style="color: #4cdb49;">CREEPER</h2>
+                        <p>Silent but deadly. Keep your distance or face the blast.</p>
+                    </div>
+                </div>
+                <!-- Villager -->
+                <div class="carousel-slide">
+                    <img src="mc_char_villager.png" alt="Villager">
+                    <div class="slide-content">
+                        <h2 style="color: #fcc200;">VILLAGER</h2>
+                        <p>Peaceful traders offering valuable resources for emeralds.</p>
+                    </div>
+                </div>
+                <!-- Skeleton -->
+                <div class="carousel-slide">
+                    <img src="mc_char_skeleton.png" alt="Skeleton">
+                    <div class="slide-content">
+                        <h2 style="color: #ddd;">SKELETON</h2>
+                        <p>Ranged threat lurking in shadows with deadly accuracy.</p>
+                    </div>
+                </div>
+                <!-- Enderman -->
+                <div class="carousel-slide">
+                    <img src="mc_char_enderman.png" alt="Enderman">
+                    <div class="slide-content">
+                        <h2 style="color: #a8dadc;">ENDERMAN</h2>
+                        <p>Teleporting traveler. Don't look them in the eyes!</p>
+                    </div>
+                </div>
+                <!-- Zombie -->
+                <div class="carousel-slide">
+                    <img src="mc_char_zombie.png" alt="Zombie">
+                    <div class="slide-content">
+                        <h2 style="color: #74C365;">ZOMBIE</h2>
+                        <p>Relentless pursuer. The most common night-time threat.</p>
+                    </div>
+                </div>
+                <!-- Wither -->
+                <div class="carousel-slide">
+                    <img src="mc_char_wither.png" alt="Wither">
+                    <div class="slide-content">
+                        <h2 style="color: #333;">WITHER</h2>
+                        <p>Destructive boss summoned from soul sand and wither skulls.</p>
+                    </div>
+                </div>
+                <!-- Warden -->
+                <div class="carousel-slide">
+                    <img src="mc_char_warden.png" alt="Warden">
+                    <div class="slide-content">
+                        <h2 style="color: #008080;">WARDEN</h2>
+                        <p>The blind horror of the Deep Dark. It hunts by sound.</p>
+                    </div>
+                </div>
+                <!-- Ender Dragon -->
+                <div class="carousel-slide">
+                    <img src="mc_char_enderdragon.png" alt="Ender Dragon">
+                    <div class="slide-content">
+                        <h2 style="color: #9b51e0;">ENDER DRAGON</h2>
+                        <p>The ultimate challenge. Ruler of the End dimension.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Nav buttons -->
+            <button class="carousel-btn prev-btn"><ion-icon name="chevron-back-outline"></ion-icon></button>
+            <button class="carousel-btn next-btn"><ion-icon name="chevron-forward-outline"></ion-icon></button>
+        </div>
+    </section>
+
+    <footer style="text-align: center; padding: 2rem; background: #000; color: #555;">
+        <p>&copy; 2024 MOJANG SYNERGY. NOT AN OFFICIAL MINECRAFT PRODUCT.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
